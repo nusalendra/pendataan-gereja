@@ -14,9 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory()->create([
-        //     'username' => 'Admin',
-        //     'password' => ('secret')
-        // ]);
+        User::create([
+            'username' => 'Admin',
+            'password' => ('secret'),
+            'role' => 'Admin'
+        ]);
     }
 }

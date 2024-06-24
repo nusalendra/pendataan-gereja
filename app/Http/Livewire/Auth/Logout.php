@@ -11,7 +11,7 @@ class Logout extends Component
     {
         auth()->logout();
 
-        return redirect('/sign-in');
+        return redirect('/');
     }
 
     
