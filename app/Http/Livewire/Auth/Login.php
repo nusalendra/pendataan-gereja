@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class Login extends Component
 {
 
-    public $email='';
+    public $username='';
     public $password='';
 
     protected $rules= [
-        'email' => 'required|email',
+        'username' => 'required',
         'password' => 'required'
 
     ];
@@ -22,24 +23,29 @@ class Login extends Component
         return view('livewire.auth.login');
     }
 
-    public function mount() {
+    // public function mount() {
       
-        $this->fill(['email' => 'admin@material.com', 'password' => 'secret']);    
-    }
+    //     $this->fill(['email' => 'admin@material.com', 'password' => 'secret']);    
+    // }
     
     public function store()
     {
-        $attributes = $this->validate();
-
-        if (! auth()->attempt($attributes)) {
+        $attributes = $this->validate([
+            'username' => 'required|string',
+            'password' => 'required|string'
+        ]);
+        
+        if (! auth()->attempt(['username' => $attributes['username'], 'password' => $attributes['password']])) {
             throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
+                'message' => 'Username Atau Password anda salah!'
             ]);
         }
 
         session()->regenerate();
-
-        return redirect('/dashboard');
-
+        if(Auth::user()->role == "Admin") {
+            return redirect('/dashboard')->with(['success'=>'Kamu sudah login']);
+        } else if(Auth::user()->role == "Jemaat") {
+            return redirect('/beranda')->with(['success'=>'Kamu sudah login']);
+        }
     }
 }
