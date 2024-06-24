@@ -18,12 +18,9 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
-        'location',
-        'phone',
-        'about',
+        'role'
     ];
 
     /**
@@ -49,4 +46,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function jemaat() {
+        return $this->hasOne(Jemaat::class);
+    }
 }
