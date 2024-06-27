@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\DataJemaatController;
+use App\Http\Controllers\Admin\PendataanBaptisController;
+use App\Http\Controllers\Admin\PendataanMenikahController;
+use App\Http\Controllers\Admin\PendataanSidiController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
@@ -45,6 +49,21 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => 'role:Admin'], function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+        Route::get('/data-jemaat', [DataJemaatController::class, 'index'])->name('data-jemaat');
+        Route::get('/data-jemaat/create', [DataJemaatController::class, 'create'])->name('data-jemaat-create');
+        Route::post('/data-jemaat', [DataJemaatController::class, 'store']);
+        Route::get('/data-jemaat/{id}', [DataJemaatController::class, 'show'])->name('data-jemaat-show');
+        Route::get('/data-jemaat/{id}/edit', [DataJemaatController::class, 'edit'])->name('data-jemaat-edit');
+        Route::put('/data-jemaat/{id}', [DataJemaatController::class, 'update']);
+        Route::delete('/data-jemaat/{id}', [DataJemaatController::class, 'destroy']);
+
+        Route::get('/pendataan-baptis', [PendataanBaptisController::class, 'index'])->name('pendataan-baptis');
+
+        Route::get('/pendataan-sidi', [PendataanSidiController::class, 'index'])->name('pendataan-sidi');
+        
+        Route::get('/pendataan-menikah', [PendataanMenikahController::class, 'index'])->name('pendataan-menikah');
+
         Route::get('billing', Billing::class)->name('billing');
         Route::get('profile', Profile::class)->name('profile');
         Route::get('tables', Tables::class)->name('tables');

@@ -10,7 +10,7 @@ class Sidi extends Model
     use HasFactory;
     protected $table = 'sidi';
     protected $primarykey = 'id';
-    protected $fillable = ['jemaat_id', 'gereja_yang_membaptis', 'tanggal_sidi', 'status_sidi'];
+    protected $fillable = ['jemaat_id', 'tanggal_sidi', 'surat_baptis', 'status_sidi'];
 
     public function jemaat() {
         return $this->belongsTo(Jemaat::class);

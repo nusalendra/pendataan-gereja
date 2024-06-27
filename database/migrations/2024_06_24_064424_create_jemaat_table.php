@@ -20,13 +20,15 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('nama_lengkap');
             $table->string('jenis_kelamin');
+            $table->string('NIK');
+            $table->string('alamat');
+            $table->date('tanggal_lahir');
+            $table->string('golongan_darah');
+            $table->string('surat_akte_lahir');
+            $table->string('nama_ayah');
+            $table->string('nama_ibu');
             $table->string('status_jemaat');
-            $table->string('alamat')->nullable();
-            $table->date('tanggal_lahir')->nullable();
-            $table->integer('umur')->nullable();
-            $table->string('nama_ayah')->nullable();
-            $table->string('nama_ibu')->nullable();
-            $table->string('NIK')->nullable();
+            $table->string('status_vaksin');
             $table->timestamps();
         });
     }

@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('jemaat_id')->constrained('jemaat')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('nama_pasangan');
-            $table->string('jenis_kelamin_pasangan');
+            $table->string('tempat_lahir_pasangan');
+            $table->date('tanggal_lahir_pasangan');
             $table->string('nama_ayah_pasangan');
             $table->string('nama_ibu_pasangan');
-            $table->integer('umur_pasangan');
-            $table->date('tanggal_lahir_pasangan');
-            $table->string('nomor_baptis_pasangan');
             $table->date('tanggal_pernikahan');
+            $table->string('surat_baptis_pasangan');
+            $table->string('surat_sidi_pasangan');
             $table->string('status_menikah')->nullable();
             $table->timestamps();
         });
