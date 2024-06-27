@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sidi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jemaat_id')->constrained('jemaat')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('gereja_yang_membaptis')->nullable();
             $table->date('tanggal_sidi')->nullable();
+            $table->string('surat_baptis');
             $table->string('status_sidi')->nullable();
             $table->timestamps();
         });
