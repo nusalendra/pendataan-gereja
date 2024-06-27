@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DataJemaatController;
 use App\Http\Controllers\Admin\PendataanBaptisController;
 use App\Http\Controllers\Admin\PendataanMenikahController;
 use App\Http\Controllers\Admin\PendataanSidiController;
+use App\Http\Controllers\Jemaat\ProfilController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
@@ -75,5 +76,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
         Route::get('user-management', UserManagement::class)->middleware('auth')->name('user-management');
+    });
+
+    Route::group(['middleware' => 'role:Jemaat'], function () {
+        Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     });
 });

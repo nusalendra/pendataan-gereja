@@ -10,6 +10,7 @@ use App\Models\Sidi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class DataJemaatController extends Controller
 {
@@ -19,7 +20,7 @@ class DataJemaatController extends Controller
     public function index()
     {
         $data = Jemaat::all();
-        return view('pages.data-jemaat.index', compact('data'));
+        return view('pages.admin.data-jemaat.index', compact('data'));
     }
 
     /**
@@ -27,7 +28,7 @@ class DataJemaatController extends Controller
      */
     public function create()
     {
-        return view('pages.data-jemaat.create');
+        return view('pages.admin.data-jemaat.create');
     }
 
     /**
@@ -35,11 +36,11 @@ class DataJemaatController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->role = 'Jemaat';
-        $user->save();
+        $user = User::create([
+            'username' => $request->username,
+            'password' => ($request->password),
+            'role' => 'Jemaat'
+        ]);
 
         $jemaat = new Jemaat();
         $jemaat->user_id = $user->id;
@@ -119,7 +120,7 @@ class DataJemaatController extends Controller
     public function show(string $id)
     {
         $data = Jemaat::find($id);
-        return view('pages.data-jemaat.show', compact('data'));
+        return view('pages.admin.data-jemaat.show', compact('data'));
     }
 
     /**
@@ -128,7 +129,7 @@ class DataJemaatController extends Controller
     public function edit(string $id)
     {
         $data = Jemaat::find($id);
-        return view('pages.data-jemaat.edit', compact('data'));
+        return view('pages.admin.data-jemaat.edit', compact('data'));
     }
 
     /**
@@ -157,10 +158,10 @@ class DataJemaatController extends Controller
         $jemaat->save();
 
         $user = User::where('id', $jemaat->user_id)->first();
-        if ($request->password !== null) {
-            $user->password = bcrypt($request->password);
-            $user->save();
-        }
+        $user->update([
+            'username' => $request->username,
+            'password' => $request->password ? ($request->password) : ($user->password)
+        ]);
 
         if ($request->tanggal_pernikahan !== null) {
             $dataMenikah = [
