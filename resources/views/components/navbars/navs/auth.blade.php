@@ -13,15 +13,43 @@
             </nav>
         @endif
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            </div>
-            {{-- <form method="POST" action="" class="d-none" id="logout-form">
-                @csrf
-            </form> --}}
-            <ul class="navbar-nav  justify-content-end">
+            @if (Auth::user()->role == 'Jemaat')
+                <ul class="navbar-nav mx-3">
+                    <li class="nav-item me-3 {{ request()->routeIs('profil') ? 'active' : '' }}">
+                        <a href="{{ route('profil') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('profil') ? 'active' : '' }}">
+                            <i class="fa fa-user me-sm-1"></i>
+                            Profil Saya
+                        </a>
+                    </li>
+                    <li class="nav-item me-3 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                        <a href="{{ route('data-jemaat') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                            <i class="fa fa-tint me-sm-1"></i>
+                            Pendaftaran Baptis
+                        </a>
+                    </li>
+                    <li class="nav-item me-3 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                        <a href="{{ route('data-jemaat') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                            <i class="fa fa-check me-sm-1"></i>
+                            Pendaftaran Sidi
+                        </a>
+                    </li>
+                    <li class="nav-item me-3 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                        <a href="{{ route('data-jemaat') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                            <i class="fa fa-heart me-sm-1"></i>
+                            Pendaftaran Menikah
+                        </a>
+                    </li>
+                </ul>
+            @endif
+
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                        <i class="fa fa-user me-sm-1"></i>
+                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0 fs-6">
+                        <i class="fa fa-sign-out-alt me-sm-1"></i>
                         <livewire:auth.logout />
                     </a>
                 </li>
@@ -38,3 +66,8 @@
         </div>
     </div>
 </nav>
+<style>
+    .nav-link.active {
+        color: blue !important;
+    }
+</style>
