@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/pendataan-baptis/{id}', [PendataanBaptisController::class, 'update'])->name('pendataan-baptis-update');
 
         Route::get('/pendataan-sidi', [PendataanSidiController::class, 'index'])->name('pendataan-sidi');
+        Route::put('/pendataan-sidi/{id}', [PendataanSidiController::class, 'update'])->name('pendataan-sidi-update');
+        Route::post('/pendataan-sidi/unduh-surat-baptis/{id}', [PendataanSidiController::class, 'unduhSuratBaptis'])->name('unduh-surat-baptis');
         
         Route::get('/pendataan-menikah', [PendataanMenikahController::class, 'index'])->name('pendataan-menikah');
 
