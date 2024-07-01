@@ -43,7 +43,7 @@
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
             <x-navbars.navs.auth></x-navbars.navs.auth>
 
-            @if (in_array($routeName, ['data-jemaat', 'data-jemaat-create', 'data-jemaat-show', 'data-jemaat-edit', 'profil']))
+            @if (in_array($routeName, ['data-jemaat', 'data-jemaat-create', 'data-jemaat-show', 'data-jemaat-edit', 'profil', 'pendaftaran-baptis']))
                 @yield('content')
             @else
                 {{ $slot }}

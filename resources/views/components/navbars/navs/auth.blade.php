@@ -22,23 +22,23 @@
                             Profil Saya
                         </a>
                     </li>
-                    <li class="nav-item me-3 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
-                        <a href="{{ route('data-jemaat') }}"
-                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                    <li class="nav-item me-3 {{ request()->routeIs('pendaftaran-baptis') ? 'active' : '' }}">
+                        <a href="{{ route('pendaftaran-baptis') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('pendaftaran-baptis') ? 'active' : '' }}">
                             <i class="fa fa-tint me-sm-1"></i>
                             Pendaftaran Baptis
                         </a>
                     </li>
-                    <li class="nav-item me-3 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
-                        <a href="{{ route('data-jemaat') }}"
-                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                    <li class="nav-item me-3 {{ request()->routeIs('pendaftaran-sidi') ? 'active' : '' }}">
+                        <a href="{{ route('pendaftaran-sidi') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('pendaftaran-sidi') ? 'active' : '' }}">
                             <i class="fa fa-check me-sm-1"></i>
                             Pendaftaran Sidi
                         </a>
                     </li>
-                    <li class="nav-item me-3 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
-                        <a href="{{ route('data-jemaat') }}"
-                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('data-jemaat') ? 'active' : '' }}">
+                    <li class="nav-item me-3 {{ request()->routeIs('pendaftaran-menikah') ? 'active' : '' }}">
+                        <a href="{{ route('pendaftaran-menikah') }}"
+                            class="nav-link text-body font-weight-bold px-0 fs-6 {{ request()->routeIs('pendaftaran-menikah') ? 'active' : '' }}">
                             <i class="fa fa-heart me-sm-1"></i>
                             Pendaftaran Menikah
                         </a>

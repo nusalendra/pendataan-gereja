@@ -31,7 +31,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h5 class="mb-3">Profil Jemaat</h5>
+                                    <h5 class="mb-3">Profil Anda</h5>
                                 </div>
                             </div>
                         </div>
@@ -78,15 +78,10 @@
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->nama_ibu }}" readonly>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-3">
                                     <label class="form-label">Status Vaksin</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->status_vaksin }}" readonly>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Status Jemaat</label>
-                                    <input type="text" class="form-control border border-2 p-2"
-                                        value="{{ $data->status_jemaat }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +92,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h5 class="">Data Baptis Jemaat</h5>
+                                    <h5 class="">Data Baptis</h5>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +122,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h5 class="">Data Sidi Jemaat</h5>
+                                    <h5 class="">Data Sidi</h5>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +152,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h5 class="">Data Menikah Jemaat</h5>
+                                    <h5 class="">Data Menikah</h5>
                                 </div>
                             </div>
                         </div>
