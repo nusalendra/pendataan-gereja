@@ -93,5 +93,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/cek-status-sidi', [PendaftaranSidiController::class, 'cekStatusSidi'])->name('cek-status-sidi');
 
         Route::get('/pendaftaran-menikah', [PendaftaranMenikahController::class, 'create'])->name('pendaftaran-menikah');
+        Route::post('/pendaftaran-menikah', [PendaftaranMenikahController::class, 'store'])->name('pendaftaran-menikah-store');
+        Route::post('/cek-status-menikah', [PendaftaranMenikahController::class, 'cekStatusMenikah'])->name('cek-status-menikah');
     });
 });

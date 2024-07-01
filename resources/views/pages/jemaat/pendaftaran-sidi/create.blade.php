@@ -91,7 +91,7 @@
                     } else if (data.status === 'Umur kurang dari 16 tahun') {
                         Swal.fire({
                             title: 'Gagal Mendaftar',
-                            text: 'Usia Anda belum memenuhi syarat untuk mendaftar sidi.',
+                            text: 'Usia anda belum memenuhi syarat untuk mendaftar sidi.',
                             icon: 'error'
                         });
                     } else if (data.status === 'Sudah Sidi') {
@@ -103,7 +103,7 @@
                     } else if (data.status === 'Mendaftar') {
                         Swal.fire({
                             title: 'Gagal Mendaftar',
-                            text: 'Pendaftaran Anda sedang menunggu konfirmasi. Anda tidak dapat mendaftar lagi saat ini.',
+                            text: 'Pendaftaran anda sedang menunggu konfirmasi. Anda tidak dapat mendaftar lagi saat ini.',
                             icon: 'warning'
                         });
                     } else if (data.status === 'Dikonfirmasi') {

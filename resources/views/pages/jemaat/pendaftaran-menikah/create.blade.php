@@ -12,43 +12,68 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="fw-semibold">Identitas Anda</h5>
-                        </div>
-                        <form action="/pendaftaran-baptis" id="pendaftaranBaptis" method="POST">
+                        <form action="/pendaftaran-menikah" id="pendaftaranMenikah" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" value="{{ $data->id }}" name="jemaat_id">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nama Lengkap</label>
+                                        <label class="form-label">Nama Lengkap Pasangan <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" class="form-control border border-2 p-2"
-                                            value="{{ $data->nama_lengkap }}" readonly>
+                                            placeholder="Masukkan Nama Lengkap Pasangan" name="nama_pasangan" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Jenis Kelamin</label>
-                                        <input type="text" class="form-control border border-2 p-2"
-                                            value="{{ $data->jenis_kelamin }}" readonly>
+                                        <label class="form-label">Jenis Kelamin Pasangan <span
+                                                class="text-danger">*</span></label>
+                                        <select name="jenis_kelamin_pasangan" class="form-select"
+                                            aria-label="Default select example" required>
+                                            <option selected disabled>Pilih Jenis Kelamin</option>
+                                            <option value="Pria">Pria</option>
+                                            <option value="Wanita">Wanita</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nama Ayah</label>
+                                        <label class="form-label">Tempat Lahir Pasangan <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" class="form-control border border-2 p-2"
-                                            value="{{ $data->nama_ayah }}" readonly>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nama Ibu</label>
-                                        <input type="text" class="form-control border border-2 p-2"
-                                            value="{{ $data->nama_ibu }}" readonly>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nama Ibu</label>
-                                        <input type="text" class="form-control border border-2 p-2"
-                                            value="{{ $data->nama_ibu }}" readonly>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Tentukan Tanggal Baptis</label>
-                                        <input type="date" name="tanggal_baptis" class="form-control border border-2 p-2"
+                                            placeholder="Masukkan Tempat Lahir Pasangan" name="tempat_lahir_pasangan"
                                             required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tanggal Lahir Pasangan <span
+                                                class="text-danger">*</span></label>
+                                        <input type="date" class="form-control border border-2 p-2"
+                                            placeholder="Masukkan Tanggal Lahir Pasangan" name="tanggal_lahir_pasangan"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nama Ayah Pasangan <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control border border-2 p-2"
+                                            placeholder="Masukkan Nama Ayah Pasangan" name="nama_ayah_pasangan" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nama Ibu Pasangan <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control border border-2 p-2"
+                                            placeholder="Masukkan Nama Ibu Pasangan" name="nama_ibu_pasangan" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Upload Surat Baptis Pasangan <small>(.pdf)</small></label>
+                                        <input type="file" name="surat_baptis_pasangan" class="form-control p-2" accept=".pdf"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Upload Surat Sidi Pasangan <small>(.pdf)</small></label>
+                                        <input type="file" name="surat_sidi_pasangan" class="form-control p-2" accept=".pdf"
+                                            required>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Tanggal Pernikahan <span
+                                                class="text-danger">*</span></label>
+                                        <input type="date" class="form-control border border-2 p-2"
+                                            placeholder="Masukkan Tanggal Pernikahan" name="tanggal_pernikahan" required>
                                     </div>
                                 </div>
                                 <div class="mt-3">
@@ -68,12 +93,13 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('pendaftaranBaptis').addEventListener('submit', function(event) {
+        document.getElementById('pendaftaranMenikah').addEventListener('submit', function(event) {
             event.preventDefault();
 
             var jemaat_id = document.querySelector('input[name="jemaat_id"]').value;
 
-            fetch('/cek-status-baptis', {
+            // Lakukan AJAX request untuk mengecek status menikah
+            fetch('/cek-status-menikah', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -85,28 +111,28 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.status === 'Sudah Baptis') {
+                    if (data.status === 'Sudah Menikah') {
                         Swal.fire({
-                            title: 'Gagal Mendaftar',
-                            text: 'Anda sudah dibaptis. Pendaftaran ulang tidak bisa dilakukan.',
+                            title: 'Gagal',
+                            text: 'Anda sudah menikah, sehingga tidak dapat melakukan pendaftaran lagi.',
                             icon: 'error'
                         });
                     } else if (data.status === 'Mendaftar') {
                         Swal.fire({
-                            title: 'Gagal Mendaftar',
-                            text: 'Pendaftaran Anda sedang menunggu konfirmasi. Anda tidak dapat mendaftar lagi saat ini.',
+                            title: 'Gagal',
+                            text: 'Pendaftaran anda sedang menunggu konfirmasi. Anda tidak dapat mendaftar lagi saat ini.',
                             icon: 'warning'
                         });
                     } else if (data.status === 'Dikonfirmasi') {
                         Swal.fire({
-                            title: 'Gagal Mendaftar',
-                            text: 'Pendaftaran baptis anda telah dikonfirmasi. Silakan melaksanakan pada tanggal yang telah anda pilih.',
+                            title: 'Gagal',
+                            text: 'Pendaftaran menikah anda telah dikonfirmasi. Silakan melaksanakan pada tanggal yang telah anda pilih.',
                             icon: 'warning'
                         });
                     } else {
                         Swal.fire({
-                            title: 'Pendaftaran Baptis',
-                            text: "Pilih Lanjutkan untuk mengirim pendaftaran Baptis",
+                            title: 'Pendaftaran Menikah',
+                            text: "Apakah identitas pasangan sudah benar?",
                             icon: 'question',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
@@ -116,7 +142,7 @@
                             if (result.isConfirmed) {
                                 Swal.fire({
                                     title: 'Pendaftaran Berhasil',
-                                    text: 'Pendaftaran Baptis sudah dikirim. Silahkan untuk menunggu konfirmasi',
+                                    text: 'Pendaftaran Menikah sudah dikirim. Silahkan untuk menunggu konfirmasi',
                                     icon: 'success'
                                 }).then(() => {
                                     event.target.submit();
@@ -128,13 +154,6 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        });
-    </script>
-    <script>
-        document.getElementById('pendaftaranBaptis').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-
         });
     </script>
 @endsection
