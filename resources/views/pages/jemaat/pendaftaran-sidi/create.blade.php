@@ -16,6 +16,19 @@
                             @csrf
                             <input type="hidden" value="{{ $data->id }}" name="jemaat_id">
                             <div class="card-body p-3">
+                                <div class="ms-1">
+                                    @if ($data->sidi && $data->sidi->status_sidi == 'Mendaftar')
+                                        <p class="fw-normal text-danger">Anda telah melakukan pendaftaran sidi</p>
+                                    @elseif ($data->sidi && $data->sidi->status_sidi == 'Dikonfirmasi')
+                                        <p class="fw-normal text-danger">Pendaftaran sidi anda telah dikonfirmasi.
+                                            Silahkan melaksanakan sidi pada tanggal
+                                            {{ \Carbon\Carbon::parse($data->sidi->tanggal_sidi)->translatedFormat('d F Y') }}
+                                        </p>
+                                    @elseif($data->sidi && $data->sidi->status_sidi == 'Sudah Sidi')
+                                        <p class="fw-normal text-primary">Anda telah sidi sebelumnya, sehingga tidak
+                                            dapat melakukan pendaftaran sidi lagi.</p>
+                                    @endif
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Lengkap</label>

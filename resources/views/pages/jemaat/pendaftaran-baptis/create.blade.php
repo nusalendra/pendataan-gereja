@@ -16,6 +16,19 @@
                             @csrf
                             <input type="hidden" value="{{ $data->id }}" name="jemaat_id">
                             <div class="card-body p-3">
+                                <div class="ms-1">
+                                    @if ($data->baptis && $data->baptis->status_baptis == 'Mendaftar')
+                                        <p class="fw-normal text-danger">Anda telah melakukan pendaftaran baptis</p>
+                                    @elseif ($data->baptis && $data->baptis->status_baptis == 'Dikonfirmasi')
+                                        <p class="fw-normal text-danger">Pendaftaran baptis anda telah dikonfirmasi.
+                                            Silahkan melaksanakan baptis pada tanggal
+                                            {{ \Carbon\Carbon::parse($data->baptis->tanggal_baptis)->translatedFormat('d F Y') }}
+                                        </p>
+                                    @elseif($data->baptis && $data->baptis->status_baptis == 'Sudah Baptis')
+                                        <p class="fw-normal text-primary">Anda telah dibaptis sebelumnya, sehingga tidak
+                                            dapat melakukan pendaftaran baptis lagi.</p>
+                                    @endif
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Lengkap</label>
@@ -39,7 +52,8 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Tentukan Tanggal Baptis</label>
-                                        <input type="date" name="tanggal_baptis" class="form-control border border-2 p-2" required>
+                                        <input type="date" name="tanggal_baptis" class="form-control border border-2 p-2"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="mt-3">

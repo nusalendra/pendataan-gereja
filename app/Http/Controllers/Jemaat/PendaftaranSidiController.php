@@ -51,7 +51,7 @@ class PendaftaranSidiController extends Controller
         $sidi = Sidi::where('jemaat_id', $jemaat->id)->first();
         $baptis = Baptis::where('jemaat_id', $jemaat->id)->first();
 
-        if (!$baptis || $baptis->tanggal_baptis == null) {
+        if (!$baptis || $baptis->tanggal_baptis == null || $baptis->status_baptis == 'Mendaftar' || $baptis->status_baptis == 'Dikonfirmasi') {
             return response()->json(['status' => 'Belum Baptis']);
         } elseif ($sidi && $sidi->status_sidi == 'Sudah Sidi') {
             return response()->json(['status' => 'Sudah Sidi']);

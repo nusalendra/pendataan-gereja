@@ -105,11 +105,11 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($data->baptis)
+                        @if ($data->baptis && $data->baptis->status_baptis == 'Sudah Baptis')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Tanggal Lahir</label>
+                                        <label class="form-label">Tanggal Baptis</label>
                                         <input type="text" class="form-control border border-2 p-2"
                                             value="{{ \Carbon\Carbon::parse($data->baptis->tanggal_baptis)->translatedFormat('d F Y') }}"
                                             readonly>
@@ -135,11 +135,11 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($data->sidi)
+                        @if ($data->sidi && $data->sidi->status_sidi == 'Sudah Sidi')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Tanggal Lahir</label>
+                                        <label class="form-label">Tanggal Sidi</label>
                                         <input type="text" class="form-control border border-2 p-2"
                                             value="{{ \Carbon\Carbon::parse($data->sidi->tanggal_sidi)->translatedFormat('d F Y') }}"
                                             readonly>
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($data->menikah)
+                        @if ($data->menikah && $data->menikah->status_menikah == 'Sudah Menikah')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">

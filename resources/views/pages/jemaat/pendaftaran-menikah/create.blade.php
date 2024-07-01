@@ -12,10 +12,24 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="/pendaftaran-menikah" id="pendaftaranMenikah" method="POST" enctype="multipart/form-data">
+                        <form action="/pendaftaran-menikah" id="pendaftaranMenikah" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" value="{{ $data->id }}" name="jemaat_id">
                             <div class="card-body p-3">
+                                <div class="ms-1">
+                                    @if ($data->menikah && $data->menikah->status_menikah == 'Mendaftar')
+                                        <p class="fw-normal text-danger">Anda telah melakukan pendaftaran menikah</p>
+                                    @elseif ($data->menikah && $data->menikah->status_menikah == 'Dikonfirmasi')
+                                        <p class="fw-normal text-danger">Pendaftaran menikah anda telah dikonfirmasi.
+                                            Silahkan melaksanakan pernikahan pada tanggal
+                                            {{ \Carbon\Carbon::parse($data->menikah->tanggal_menikah)->translatedFormat('d F Y') }}
+                                        </p>
+                                    @elseif($data->menikah && $data->menikah->status_menikah == 'Sudah Menikah')
+                                        <p class="fw-normal text-primary">Anda telah menikah sebelumnya, sehingga tidak
+                                            dapat melakukan pendaftaran menikah lagi.</p>
+                                    @endif
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Lengkap Pasangan <span
@@ -61,13 +75,13 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Upload Surat Baptis Pasangan <small>(.pdf)</small></label>
-                                        <input type="file" name="surat_baptis_pasangan" class="form-control p-2" accept=".pdf"
-                                            required>
+                                        <input type="file" name="surat_baptis_pasangan" class="form-control p-2"
+                                            accept=".pdf" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Upload Surat Sidi Pasangan <small>(.pdf)</small></label>
-                                        <input type="file" name="surat_sidi_pasangan" class="form-control p-2" accept=".pdf"
-                                            required>
+                                        <input type="file" name="surat_sidi_pasangan" class="form-control p-2"
+                                            accept=".pdf" required>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Tanggal Pernikahan <span
