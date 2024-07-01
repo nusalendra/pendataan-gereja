@@ -4,6 +4,10 @@ use App\Http\Controllers\Admin\DataJemaatController;
 use App\Http\Controllers\Admin\PendataanBaptisController;
 use App\Http\Controllers\Admin\PendataanMenikahController;
 use App\Http\Controllers\Admin\PendataanSidiController;
+use App\Http\Controllers\Jemaat\PendaftaranBaptisController;
+use App\Http\Controllers\Jemaat\PendaftaranMenikahController;
+use App\Http\Controllers\Jemaat\PendaftaranSidiController;
+use App\Http\Controllers\Jemaat\ProfilController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
@@ -75,5 +79,21 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
         Route::get('user-management', UserManagement::class)->middleware('auth')->name('user-management');
+    });
+
+    Route::group(['middleware' => 'role:Jemaat'], function () {
+        Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+        
+        Route::get('/pendaftaran-baptis', [PendaftaranBaptisController::class, 'create'])->name('pendaftaran-baptis');
+        Route::post('/pendaftaran-baptis', [PendaftaranBaptisController::class, 'store'])->name('pendaftaran-baptis-store');
+        Route::post('/cek-status-baptis', [PendaftaranBaptisController::class, 'cekStatusBaptis'])->name('cek-status-baptis');
+
+        Route::get('/pendaftaran-sidi', [PendaftaranSidiController::class, 'create'])->name('pendaftaran-sidi');
+        Route::post('/pendaftaran-sidi', [PendaftaranSidiController::class, 'store'])->name('pendaftaran-sidi-store');
+        Route::post('/cek-status-sidi', [PendaftaranSidiController::class, 'cekStatusSidi'])->name('cek-status-sidi');
+
+        Route::get('/pendaftaran-menikah', [PendaftaranMenikahController::class, 'create'])->name('pendaftaran-menikah');
+        Route::post('/pendaftaran-menikah', [PendaftaranMenikahController::class, 'store'])->name('pendaftaran-menikah-store');
+        Route::post('/cek-status-menikah', [PendaftaranMenikahController::class, 'cekStatusMenikah'])->name('cek-status-menikah');
     });
 });

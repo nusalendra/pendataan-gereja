@@ -37,12 +37,13 @@
         </div>
         <x-plugins></x-plugins>
     @else
-        {{-- Debug output --}}
-        <x-navbars.sidebar></x-navbars.sidebar>
+        @if (in_array($routeName, ['dashboard', 'data-jemaat', 'data-jemaat-create', 'data-jemaat-show', 'data-jemaat-edit']))
+            <x-navbars.sidebar></x-navbars.sidebar>
+        @endif
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
             <x-navbars.navs.auth></x-navbars.navs.auth>
 
-            @if (in_array($routeName, ['data-jemaat', 'data-jemaat-create', 'data-jemaat-show', 'data-jemaat-edit']))
+            @if (in_array($routeName, ['data-jemaat', 'data-jemaat-create', 'data-jemaat-show', 'data-jemaat-edit', 'profil', 'pendaftaran-baptis', 'pendaftaran-sidi', 'pendaftaran-menikah']))
                 @yield('content')
             @else
                 {{ $slot }}

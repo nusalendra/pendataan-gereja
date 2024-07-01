@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('jemaat_id')->constrained('jemaat')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('nama_pasangan');
+            $table->string('jenis_kelamin_pasangan');
             $table->string('tempat_lahir_pasangan');
             $table->date('tanggal_lahir_pasangan');
             $table->string('nama_ayah_pasangan');
