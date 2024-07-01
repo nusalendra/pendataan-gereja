@@ -77,7 +77,7 @@
                                                     <form action="/pendataan-sidi/unduh-surat-baptis/{{ $item->id }}"
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-warning">
+                                                        <button type="submit" class="btn btn-dark">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor"
                                                                 class="bi bi-download mb-1 me-1" viewBox="0 0 16 16">

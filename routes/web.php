@@ -70,6 +70,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pendataan-sidi/unduh-surat-baptis/{id}', [PendataanSidiController::class, 'unduhSuratBaptis'])->name('unduh-surat-baptis');
         
         Route::get('/pendataan-menikah', [PendataanMenikahController::class, 'index'])->name('pendataan-menikah');
+        Route::get('/pendataan-menikah/{id}', [PendataanMenikahController::class, 'show'])->name('pendataan-menikah-show');
+        Route::put('/pendataan-menikah/{id}', [PendataanMenikahController::class, 'update'])->name('pendataan-menikah-update');
+        Route::post('/pendataan-menikah/unduh-berkas-pendaftaran-menikah/{id}', [PendataanMenikahController::class, 'unduhBerkasPendaftaranMenikah'])->name('unduh-berkas-pendaftaran-menikah');
 
         Route::get('billing', Billing::class)->name('billing');
         Route::get('profile', Profile::class)->name('profile');
