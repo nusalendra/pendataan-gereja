@@ -87,8 +87,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pendaftaran-baptis', [PendaftaranBaptisController::class, 'store'])->name('pendaftaran-baptis-store');
         Route::post('/cek-status-baptis', [PendaftaranBaptisController::class, 'cekStatusBaptis'])->name('cek-status-baptis');
 
-        Route::get('/pendaftaran-sidi', [PendaftaranSidiController::class, 'index'])->name('pendaftaran-sidi');
+        Route::get('/pendaftaran-sidi', [PendaftaranSidiController::class, 'create'])->name('pendaftaran-sidi');
+        Route::post('/pendaftaran-sidi', [PendaftaranSidiController::class, 'store'])->name('pendaftaran-sidi-store');
+        Route::post('/cek-status-sidi', [PendaftaranSidiController::class, 'cekStatusSidi'])->name('cek-status-sidi');
 
-        Route::get('/pendaftaran-menikah', [PendaftaranBaptisController::class, 'index'])->name('pendaftaran-menikah');
+        Route::get('/pendaftaran-menikah', [PendaftaranBaptisController::class, 'create'])->name('pendaftaran-menikah');
     });
 });
