@@ -8,11 +8,14 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
-                                    <h5 class="mb-3 fw-bold">Pendaftaran Sidi</h5>
+                                    <h5 class="mb-3 fw-bold">Pendaftaran Menikah</h5>
                                 </div>
                             </div>
                         </div>
-                        <form action="/pendaftaran-sidi" id="pendaftaranSidi" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <h5 class="fw-semibold">Identitas Anda</h5>
+                        </div>
+                        <form action="/pendaftaran-baptis" id="pendaftaranBaptis" method="POST">
                             @csrf
                             <input type="hidden" value="{{ $data->id }}" name="jemaat_id">
                             <div class="card-body p-3">
@@ -38,13 +41,13 @@
                                             value="{{ $data->nama_ibu }}" readonly>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Tentukan Tanggal Sidi</label>
-                                        <input type="date" name="tanggal_sidi" class="form-control border border-2 p-2"
-                                            required>
+                                        <label class="form-label">Nama Ibu</label>
+                                        <input type="text" class="form-control border border-2 p-2"
+                                            value="{{ $data->nama_ibu }}" readonly>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Upload Surat Baptis <small>(.pdf)</small></label>
-                                        <input type="file" name="surat_baptis" class="form-control p-2" accept=".pdf"
+                                        <label class="form-label">Tentukan Tanggal Baptis</label>
+                                        <input type="date" name="tanggal_baptis" class="form-control border border-2 p-2"
                                             required>
                                     </div>
                                 </div>
@@ -65,12 +68,12 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('pendaftaranSidi').addEventListener('submit', function(event) {
+        document.getElementById('pendaftaranBaptis').addEventListener('submit', function(event) {
             event.preventDefault();
 
             var jemaat_id = document.querySelector('input[name="jemaat_id"]').value;
 
-            fetch('/cek-status-sidi', {
+            fetch('/cek-status-baptis', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -82,22 +85,10 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.status === 'Belum Baptis') {
+                    if (data.status === 'Sudah Baptis') {
                         Swal.fire({
                             title: 'Gagal Mendaftar',
-                            text: 'Anda belum dibaptis, sehingga tidak dapat mendaftar untuk Sidi.',
-                            icon: 'error'
-                        });
-                    } else if (data.status === 'Umur kurang dari 16 tahun') {
-                        Swal.fire({
-                            title: 'Gagal Mendaftar',
-                            text: 'Usia Anda belum memenuhi syarat untuk mendaftar sidi.',
-                            icon: 'error'
-                        });
-                    } else if (data.status === 'Sudah Sidi') {
-                        Swal.fire({
-                            title: 'Gagal Mendaftar',
-                            text: 'Anda sudah sidi. Pendaftaran ulang tidak bisa dilakukan.',
+                            text: 'Anda sudah dibaptis. Pendaftaran ulang tidak bisa dilakukan.',
                             icon: 'error'
                         });
                     } else if (data.status === 'Mendaftar') {
@@ -109,13 +100,13 @@
                     } else if (data.status === 'Dikonfirmasi') {
                         Swal.fire({
                             title: 'Gagal Mendaftar',
-                            text: 'Pendaftaran sidi anda telah dikonfirmasi. Silakan melaksanakan pada tanggal yang telah anda pilih.',
+                            text: 'Pendaftaran baptis anda telah dikonfirmasi. Silakan melaksanakan pada tanggal yang telah anda pilih.',
                             icon: 'warning'
                         });
                     } else {
                         Swal.fire({
-                            title: 'Pendaftaran Sidi',
-                            text: "Pilih Lanjutkan untuk mengirim pendaftaran Sidi",
+                            title: 'Pendaftaran Baptis',
+                            text: "Pilih Lanjutkan untuk mengirim pendaftaran Baptis",
                             icon: 'question',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
@@ -125,7 +116,7 @@
                             if (result.isConfirmed) {
                                 Swal.fire({
                                     title: 'Pendaftaran Berhasil',
-                                    text: 'Pendaftaran Sidi sudah dikirim. Silahkan untuk menunggu konfirmasi',
+                                    text: 'Pendaftaran Baptis sudah dikirim. Silahkan untuk menunggu konfirmasi',
                                     icon: 'success'
                                 }).then(() => {
                                     event.target.submit();
@@ -140,7 +131,7 @@
         });
     </script>
     <script>
-        document.getElementById('pendaftaranSidi').addEventListener('submit', function(event) {
+        document.getElementById('pendaftaranBaptis').addEventListener('submit', function(event) {
             event.preventDefault();
 
 

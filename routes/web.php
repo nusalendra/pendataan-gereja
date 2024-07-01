@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PendataanBaptisController;
 use App\Http\Controllers\Admin\PendataanMenikahController;
 use App\Http\Controllers\Admin\PendataanSidiController;
 use App\Http\Controllers\Jemaat\PendaftaranBaptisController;
+use App\Http\Controllers\Jemaat\PendaftaranMenikahController;
 use App\Http\Controllers\Jemaat\PendaftaranSidiController;
 use App\Http\Controllers\Jemaat\ProfilController;
 use App\Http\Livewire\Auth\ForgotPassword;
@@ -91,6 +92,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pendaftaran-sidi', [PendaftaranSidiController::class, 'store'])->name('pendaftaran-sidi-store');
         Route::post('/cek-status-sidi', [PendaftaranSidiController::class, 'cekStatusSidi'])->name('cek-status-sidi');
 
-        Route::get('/pendaftaran-menikah', [PendaftaranBaptisController::class, 'create'])->name('pendaftaran-menikah');
+        Route::get('/pendaftaran-menikah', [PendaftaranMenikahController::class, 'create'])->name('pendaftaran-menikah');
     });
 });

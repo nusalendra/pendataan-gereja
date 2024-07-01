@@ -39,10 +39,17 @@ class PendaftaranSidiController extends Controller
 
     public function cekStatusSidi(Request $request)
     {
-        $jemaat_id = $request->jemaat_id;
+        $jemaat = Jemaat::find($request->jemaat_id);
 
-        $sidi = Sidi::where('jemaat_id', $jemaat_id)->first();
-        $baptis = Baptis::where('jemaat_id', $jemaat_id)->first();
+        $tanggal_lahir = \Carbon\Carbon::parse($jemaat->tanggal_lahir);
+        $umur = $tanggal_lahir->diffInYears(\Carbon\Carbon::now());
+        
+        if ($umur < 16) {
+            return response()->json(['status' => 'Umur kurang dari 16 tahun']);
+        }
+
+        $sidi = Sidi::where('jemaat_id', $jemaat->id)->first();
+        $baptis = Baptis::where('jemaat_id', $jemaat->id)->first();
 
         if (!$baptis || $baptis->tanggal_baptis == null) {
             return response()->json(['status' => 'Belum Baptis']);

@@ -53,6 +53,15 @@
                                         value="{{ \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y') }}"
                                         readonly>
                                 </div>
+                                @php
+                                    $tanggal_lahir = \Carbon\Carbon::parse($data->tanggal_lahir);
+                                    $umur = $tanggal_lahir->diffInYears(\Carbon\Carbon::now());
+                                @endphp
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Umur</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $umur }} Tahun" readonly>
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">NIK</label>
                                     <input type="text" class="form-control border border-2 p-2"
@@ -69,6 +78,11 @@
                                         value="{{ $data->golongan_darah }}" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label class="form-label">Status Vaksin</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $data->status_vaksin }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Nama Ayah</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->nama_ayah }}" readonly>
@@ -77,11 +91,6 @@
                                     <label class="form-label">Nama Ibu</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->nama_ibu }}" readonly>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Status Vaksin</label>
-                                    <input type="text" class="form-control border border-2 p-2"
-                                        value="{{ $data->status_vaksin }}" readonly>
                                 </div>
                             </div>
                         </div>
