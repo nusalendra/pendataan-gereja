@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/data-jemaat/{id}', [DataJemaatController::class, 'destroy']);
 
         Route::get('/pendataan-baptis', [PendataanBaptisController::class, 'index'])->name('pendataan-baptis');
+        Route::put('/pendataan-baptis/{id}', [PendataanBaptisController::class, 'update'])->name('pendataan-baptis-update');
 
         Route::get('/pendataan-sidi', [PendataanSidiController::class, 'index'])->name('pendataan-sidi');
         
