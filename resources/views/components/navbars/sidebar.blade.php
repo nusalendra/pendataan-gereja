@@ -82,8 +82,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'pendataan-menikah' ? ' active bg-gradient-danger' : '' }} "
-                    href="{{ route('pendataan-menikah') }}">
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'pendataan-kematian' ? ' active bg-gradient-danger' : '' }} "
+                    href="{{ route('pendataan-kematian') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Pendataan Kematian</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'laporan' ? ' active bg-gradient-danger' : '' }} "
+                    href="{{ route('laporan') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>

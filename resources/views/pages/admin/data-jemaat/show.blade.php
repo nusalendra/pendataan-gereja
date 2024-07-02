@@ -53,6 +53,15 @@
                                         value="{{ \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y') }}"
                                         readonly>
                                 </div>
+                                @php
+                                    $tanggal_lahir = \Carbon\Carbon::parse($data->tanggal_lahir);
+                                    $umur = $tanggal_lahir->diffInYears(\Carbon\Carbon::now());
+                                @endphp
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Umur</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $umur}} Tahun" readonly>
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">NIK</label>
                                     <input type="text" class="form-control border border-2 p-2"
@@ -69,6 +78,11 @@
                                         value="{{ $data->golongan_darah }}" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label class="form-label">Status Vaksin</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $data->status_vaksin }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Nama Ayah</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->nama_ayah }}" readonly>
@@ -78,12 +92,7 @@
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->nama_ibu }}" readonly>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Status Vaksin</label>
-                                    <input type="text" class="form-control border border-2 p-2"
-                                        value="{{ $data->status_vaksin }}" readonly>
-                                </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-3">
                                     <label class="form-label">Status Jemaat</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->status_jemaat }}" readonly>
@@ -101,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($data->baptis)
+                        @if ($data->baptis && $data->baptis->status_baptis == 'Sudah Baptis')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -119,7 +128,7 @@
                             </div>
                         @else
                             <div class="card-body">
-                                <p class="ml-5">Tidak Ada Data Baptis / Belum Mendaftar Baptis</p>
+                                <p class="ml-5">Tidak Ada Data Baptis / Belum Baptis</p>
                             </div>
                         @endif
                     </div>
@@ -131,7 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($data->sidi)
+                        @if ($data->sidi && $data->sidi->status_sidi == 'Sudah Sidi')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -149,7 +158,7 @@
                             </div>
                         @else
                             <div class="card-body">
-                                <p class="ml-5">Tidak Ada Data Sidi / Belum Mendaftar Sidi</p>
+                                <p class="ml-5">Tidak Ada Data Sidi / Belum Sidi</p>
                             </div>
                         @endif
                     </div>
@@ -161,7 +170,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($data->menikah)
+                        @if ($data->menikah && $data->menikah->status_menikah == 'Sudah Menikah')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DataJemaatController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PendataanBaptisController;
+use App\Http\Controllers\Admin\PendataanKematianController;
 use App\Http\Controllers\Admin\PendataanMenikahController;
 use App\Http\Controllers\Admin\PendataanSidiController;
 use App\Http\Controllers\Jemaat\PendaftaranBaptisController;
@@ -63,10 +65,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/data-jemaat/{id}', [DataJemaatController::class, 'destroy']);
 
         Route::get('/pendataan-baptis', [PendataanBaptisController::class, 'index'])->name('pendataan-baptis');
+        Route::put('/pendataan-baptis/{id}', [PendataanBaptisController::class, 'update'])->name('pendataan-baptis-update');
 
         Route::get('/pendataan-sidi', [PendataanSidiController::class, 'index'])->name('pendataan-sidi');
+        Route::put('/pendataan-sidi/{id}', [PendataanSidiController::class, 'update'])->name('pendataan-sidi-update');
+        Route::post('/pendataan-sidi/unduh-surat-baptis/{id}', [PendataanSidiController::class, 'unduhSuratBaptis'])->name('unduh-surat-baptis');
         
         Route::get('/pendataan-menikah', [PendataanMenikahController::class, 'index'])->name('pendataan-menikah');
+        Route::get('/pendataan-menikah/{id}', [PendataanMenikahController::class, 'show'])->name('pendataan-menikah-show');
+        Route::put('/pendataan-menikah/{id}', [PendataanMenikahController::class, 'update'])->name('pendataan-menikah-update');
+        Route::post('/pendataan-menikah/unduh-berkas-pendaftaran-menikah/{id}', [PendataanMenikahController::class, 'unduhBerkasPendaftaranMenikah'])->name('unduh-berkas-pendaftaran-menikah');
+
+        Route::get('/pendataan-kematian', [PendataanKematianController::class, 'index'])->name('pendataan-kematian');
+        Route::post('/pendataan-kematian/ubah-status-kematian', [PendataanKematianController::class, 'ubahStatusKematian'])->name('ubah-status-kematian');
+
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+        Route::get('/laporan/cetak-pdf', [LaporanController::class, 'cetakPDF'])->name('laporan-cetak-pdf');
 
         Route::get('billing', Billing::class)->name('billing');
         Route::get('profile', Profile::class)->name('profile');

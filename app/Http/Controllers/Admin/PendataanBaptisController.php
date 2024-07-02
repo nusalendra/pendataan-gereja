@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Baptis;
 use Illuminate\Http\Request;
 
 class PendataanBaptisController extends Controller
@@ -12,7 +13,8 @@ class PendataanBaptisController extends Controller
      */
     public function index()
     {
-        //
+        $data = Baptis::all();
+        return view('pages.admin.pendataan-baptis.index', compact('data'));
     }
 
     /**
@@ -36,7 +38,7 @@ class PendataanBaptisController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // 
     }
 
     /**
@@ -52,7 +54,17 @@ class PendataanBaptisController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $baptis = Baptis::find($id);
+
+        if ($request->input('action_type') == 'konfirmasi_baptis') {
+            $baptis->status_baptis = 'Dikonfirmasi';
+        } elseif ($request->input('action_type') == 'sudah_baptis') {
+            $baptis->status_baptis = 'Sudah Baptis';
+        }
+
+        $baptis->save();
+
+        return redirect()->back();
     }
 
     /**
