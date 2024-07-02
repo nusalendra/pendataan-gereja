@@ -17,6 +17,13 @@ class ProfilController extends Controller
         $user = Auth::user();
         $data = Jemaat::where('user_id', $user->id)->first();
 
+        $tanggal_lahir = \Carbon\Carbon::parse($data->tanggal_lahir);
+        $umur = $tanggal_lahir->diffInYears(\Carbon\Carbon::now());
+
+        if ($data->baptis && $data->baptis->status_baptis == 'Sudah Baptis' && !$data->sidi && $umur >= 16 && !session()->has('showSweetAlert')) {
+            session()->flash('showSweetAlert', true);
+        }
+
         return view('pages.jemaat.profil.index', compact('data'));
     }
 
