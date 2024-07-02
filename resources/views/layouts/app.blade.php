@@ -4,14 +4,9 @@
     @endphp
 
     @if (in_array($routeName, [
-            'static-sign-in',
-            'static-sign-up',
-            'register',
             'login',
-            'password.forgot',
-            'reset-password',
         ]))
-        @if (in_array($routeName, ['static-sign-in', 'login', 'password.forgot', 'reset-password']))
+        @if (in_array($routeName, ['login']))
             <main class="main-content mt-0">
                 <div class="page-header page-header-bg align-items-start min-vh-100">
                     <span class="mask bg-gradient-dark opacity-6"></span>
@@ -21,20 +16,6 @@
         @else
             {{ $slot }}
         @endif
-    @elseif (in_array($routeName, ['rtl']))
-        {{ $slot }}
-    @elseif (in_array($routeName, ['virtual-reality']))
-        <div class="virtual-reality">
-            <x-navbars.navs.auth></x-navbars.navs.auth>
-            <div class="border-radius-xl mx-2 mx-md-3 position-relative"
-                style="background-image: url('{{ asset('assets') }}/img/vr-bg.jpg'); background-size: cover;">
-                <x-navbars.sidebar></x-navbars.sidebar>
-                <main class="main-content border-radius-lg h-100">
-                    {{ $slot }}
-                </main>
-            </div>
-            <x-footers.auth></x-footers.auth>
-        </div>
     @else
         @if (in_array($routeName, [
                 'dashboard',
