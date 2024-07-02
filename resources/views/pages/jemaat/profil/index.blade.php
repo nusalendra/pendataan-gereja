@@ -176,7 +176,8 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Tempat, Tanggal Lahir Pasangan</label>
                                         <input type="text" class="form-control border border-2 p-2"
-                                            value="{{ $data->menikah->tempat_lahir_pasangan }}, {{ \Carbon\Carbon::parse($data->menikah->tanggal_lahir_pasangan)->translatedFormat('d F Y') }}" readonly>
+                                            value="{{ $data->menikah->tempat_lahir_pasangan }}, {{ \Carbon\Carbon::parse($data->menikah->tanggal_lahir_pasangan)->translatedFormat('d F Y') }}"
+                                            readonly>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Ayah Pasangan</label>
@@ -211,4 +212,17 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('showSweetAlert'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Rekomendasi Sidi",
+                    text: "Anda sudah berusia 16 tahun atau lebih dan sudah baptis, jadi kami mengundang anda untuk mendaftar Sidi. Klik kalimat di bawah untuk proses pendaftarannya.",
+                    footer: '<a href="/pendaftaran-sidi" style="color: red;">Klik untuk mendaftar Sidi</a>'
+                });
+            });
+        </script>
+    @endif
 @endsection
