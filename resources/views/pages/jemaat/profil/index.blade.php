@@ -123,7 +123,7 @@
                             </div>
                         @else
                             <div class="card-body">
-                                <p class="ml-5">Tidak Ada Data Baptis / Belum Mendaftar Baptis</p>
+                                <p class="ml-5">Tidak Ada Data Baptis / Belum Baptis</p>
                             </div>
                         @endif
                     </div>
@@ -153,7 +153,7 @@
                             </div>
                         @else
                             <div class="card-body">
-                                <p class="ml-5">Tidak Ada Data Sidi / Belum Mendaftar Sidi</p>
+                                <p class="ml-5">Tidak Ada Data Sidi / Belum Sidi</p>
                             </div>
                         @endif
                     </div>
