@@ -35,7 +35,6 @@
             </div>
             <x-footers.auth></x-footers.auth>
         </div>
-        <x-plugins></x-plugins>
     @else
         @if (in_array($routeName, [
                 'dashboard',
@@ -48,7 +47,7 @@
                 'pendataan-menikah',
                 'pendataan-menikah-show',
                 'pendataan-kematian',
-                'laporan'
+                'laporan',
             ]))
             <x-navbars.sidebar></x-navbars.sidebar>
         @endif
@@ -76,6 +75,5 @@
                 {{ $slot }}
             @endif
         </main>
-        <x-plugins></x-plugins>
     @endif
 </x-layouts.base>
