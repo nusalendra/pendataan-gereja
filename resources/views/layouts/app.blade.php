@@ -46,7 +46,9 @@
                 'pendataan-baptis',
                 'pendataan-sidi',
                 'pendataan-menikah',
-                'pendataan-menikah-show'
+                'pendataan-menikah-show',
+                'pendataan-kematian',
+                'laporan'
             ]))
             <x-navbars.sidebar></x-navbars.sidebar>
         @endif
@@ -62,6 +64,8 @@
                     'pendataan-sidi',
                     'pendataan-menikah',
                     'pendataan-menikah-show',
+                    'pendataan-kematian',
+                    'laporan',
                     'profil',
                     'pendaftaran-baptis',
                     'pendaftaran-sidi',

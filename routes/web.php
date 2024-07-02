@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DataJemaatController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PendataanBaptisController;
+use App\Http\Controllers\Admin\PendataanKematianController;
 use App\Http\Controllers\Admin\PendataanMenikahController;
 use App\Http\Controllers\Admin\PendataanSidiController;
 use App\Http\Controllers\Jemaat\PendaftaranBaptisController;
@@ -73,6 +75,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pendataan-menikah/{id}', [PendataanMenikahController::class, 'show'])->name('pendataan-menikah-show');
         Route::put('/pendataan-menikah/{id}', [PendataanMenikahController::class, 'update'])->name('pendataan-menikah-update');
         Route::post('/pendataan-menikah/unduh-berkas-pendaftaran-menikah/{id}', [PendataanMenikahController::class, 'unduhBerkasPendaftaranMenikah'])->name('unduh-berkas-pendaftaran-menikah');
+
+        Route::get('/pendataan-kematian', [PendataanKematianController::class, 'index'])->name('pendataan-kematian');
+        Route::post('/pendataan-kematian/ubah-status-kematian', [PendataanKematianController::class, 'ubahStatusKematian'])->name('ubah-status-kematian');
+
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
 
         Route::get('billing', Billing::class)->name('billing');
         Route::get('profile', Profile::class)->name('profile');

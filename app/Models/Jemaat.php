@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Jemaat extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = 'jemaat';
     protected $primarykey = 'id';
     protected $fillable = ['user_id', 'nama_lengkap', 'jenis_kelamin', 'alamat', 'tanggal_lahir', 'golongan_darah', 'surat_akte_lahir',' nama_ayah', 'nama_ibu', 'NIK', 'status_jemaat', 'status_vaksin'];
@@ -27,5 +26,9 @@ class Jemaat extends Model
 
     public function sidi() {
         return $this->hasOne(Sidi::class);
+    }
+
+    public function kematian() {
+        return $this->hasOne(Kematian::class);
     }
 }
