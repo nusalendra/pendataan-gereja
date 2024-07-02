@@ -2,10 +2,18 @@
 @section('content')
     <div class="card mx-4 mt-3">
         <div class="d-flex justify-content-between card-header ">
-            <h5 class="text-dark fw-bold">Data Jemaat</h5>
-            {{-- <a href="/data-jemaat/create">
-                <button type="button" class="btn btn-info">Tambah Jemaat</button>
-            </a> --}}
+            <h5 class="text-dark fw-bold">Laporan</h5>
+            <a href="/laporan/cetak-pdf" target="_blank">
+                <button type="button" class="btn btn-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-printer mb-1 me-1" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1" />
+                        <path
+                            d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1" />
+                    </svg>
+                    Cetak PDF
+                </button>
+            </a>
         </div>
         <div class="card ps-3 pe-3 pb-3">
             <div class="card-body px-0 pt-0 pb-2">
@@ -16,10 +24,10 @@
                                 <th class="text-uppercase text-xs font-weight-bolder text-start">No</th>
                                 <th class="text-uppercase text-xs font-weight-bolder">Nama Lengkap</th>
                                 <th class="text-uppercase text-xs font-weight-bolder">Jenis Kelamin</th>
+                                <th class="text-uppercase text-xs font-weight-bolder">Umur</th>
                                 <th class="text-uppercase text-xs font-weight-bolder">Status Baptis</th>
                                 <th class="text-uppercase text-xs font-weight-bolder">Status Sidi</th>
                                 <th class="text-uppercase text-xs font-weight-bolder">Status Pernikahan</th>
-                                <th class="text-uppercase text-xs font-weight-bolder">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,79 +54,68 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @php
+                                        $tanggal_lahir = \Carbon\Carbon::parse($item->tanggal_lahir);
+                                        $umur = $tanggal_lahir->diffInYears(\Carbon\Carbon::now());
+                                    @endphp
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ $item->baptis->status_baptis }}</h6>
+                                                <h6 class="mb-0 text-sm">{{ $umur }} Tahun</h6>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ $item->sidi->status_sidi }}</h6>
+                                    @if ($item->baptis)
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $item->baptis->status_baptis }}</h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ $item->menikah->status_menikah }}</h6>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Belum Baptis</h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{-- <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <a href="/data-jemaat/{{ $item->id }}">
-                                                    <button type="button" class="btn btn-info">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-pip me-1"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" />
-                                                            <path
-                                                                d="M8 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                        Detail
-                                                    </button>
-                                                </a>
+                                        </td>
+                                    @endif
+                                    @if ($item->sidi)
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $item->sidi->status_sidi }}</h6>
+                                                </div>
                                             </div>
-                                            <div class="ms-2 d-flex flex-column justify-content-center">
-                                                <a href="/data-jemaat/{{ $item->id }}/edit">
-                                                    <button type="button" class="btn btn-warning">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor"
-                                                            class="bi bi-pencil-square me-1" viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                            <path fill-rule="evenodd"
-                                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                                        </svg>
-                                                        Edit
-                                                    </button>
-                                                </a>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Belum Sidi</h6>
+                                                </div>
                                             </div>
-                                            <div class="ms-2 d-flex flex-column justify-content-center">
-                                                <form id="delete-form-{{ $item->id }}"
-                                                    action="/data-jemaat/{{ $item->id }}" method="POST"
-                                                    role="form text-left"
-                                                    onsubmit="event.preventDefault(); hapusData({{ $item->id }})">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor"
-                                                            class="bi bi-trash3 mb-1 me-1" viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-                                                        </svg>
-                                                        Hapus
-                                                    </button>
-                                                </form>
+                                        </td>
+                                    @endif
+                                    @if ($item->menikah)
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $item->menikah->status_menikah }}</h6>
+                                                </div>
                                             </div>
-                                        </div> --}}
-                                    </td>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Belum Menikah</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -133,22 +130,4 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function hapusData(id) {
-            Swal.fire({
-                title: "Hapus Data Jemaat?",
-                text: "Data Jemaat akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ya, Hapus"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + id).submit();
-                }
-            });
-        }
-    </script>
 @endsection

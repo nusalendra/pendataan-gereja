@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pendataan-kematian/ubah-status-kematian', [PendataanKematianController::class, 'ubahStatusKematian'])->name('ubah-status-kematian');
 
         Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+        Route::get('/laporan/cetak-pdf', [LaporanController::class, 'cetakPDF'])->name('laporan-cetak-pdf');
 
         Route::get('billing', Billing::class)->name('billing');
         Route::get('profile', Profile::class)->name('profile');
