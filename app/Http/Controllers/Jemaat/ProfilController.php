@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Jemaat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 class ProfilController extends Controller
 {
@@ -73,5 +75,18 @@ class ProfilController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function unduhSuratAkteLahir($id)
+    {
+        $jemaat = Jemaat::find($id);
+
+        if ($jemaat->surat_akte_lahir) {
+            $filePath = public_path('/surat-akte-lahir' . '/' . $jemaat->surat_akte_lahir);
+
+            if (File::exists($filePath)) {
+                return Response::download($filePath);
+            }
+        }
     }
 }
