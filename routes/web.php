@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => 'role:Jemaat'], function () {
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+        Route::post('/profil/unduh-surat-akte-lahir/{id}', [ProfilController::class, 'unduhSuratAkteLahir']);
         
         Route::get('/pendaftaran-baptis', [PendaftaranBaptisController::class, 'create'])->name('pendaftaran-baptis');
         Route::post('/pendaftaran-baptis', [PendaftaranBaptisController::class, 'store'])->name('pendaftaran-baptis-store');
