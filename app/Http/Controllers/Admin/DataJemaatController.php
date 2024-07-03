@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 
 class DataJemaatController extends Controller
 {
@@ -290,5 +291,18 @@ class DataJemaatController extends Controller
         $user->delete();
 
         return redirect('/data-jemaat');
+    }
+
+    public function unduhSuratAkteLahir($id)
+    {
+        $jemaat = Jemaat::find($id);
+
+        if ($jemaat->surat_akte_lahir) {
+            $filePath = public_path('/surat-akte-lahir' . '/' . $jemaat->surat_akte_lahir);
+
+            if (File::exists($filePath)) {
+                return Response::download($filePath);
+            }
+        }
     }
 }
