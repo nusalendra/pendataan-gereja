@@ -83,6 +83,16 @@
                                         value="{{ $data->status_vaksin }}" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label class="form-label">Pendidikan</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $data->pendidikan }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Pekerjaan</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $data->pekerjaan }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Nama Ayah</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->nama_ayah }}" readonly>
