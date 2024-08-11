@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->string('golongan_darah');
             $table->string('surat_akte_lahir');
+            $table->string('pekerjaan');
+            $table->string('pendidikan');
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->string('status_jemaat');

@@ -33,8 +33,7 @@
                         <div class="mb-3 mx-2 w-50">
                             <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                             <input type="date" class="form-control" name="tanggal_lahir"
-                                value="{{ $data->tanggal_lahir }}" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
-                            >
+                                value="{{ $data->tanggal_lahir }}" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir">
                         </div>
                         <div class="mb-3 mx-2 w-50">
                             <label for="NIK" class="form-label">NIK</label>
@@ -61,6 +60,19 @@
                     </div>
                     <div class="d-flex justify-content-around">
                         <div class="mb-3 mx-2 w-50">
+                            <label for="pendidikan" class="form-label">Pendidikan Terakhir <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="pendidikan" id="pendidikan"
+                                value="{{ $data->pendidikan }}" placeholder="Masukkan Pendidikan Terakhir" required>
+                        </div>
+                        <div class="mb-3 mx-2 w-50">
+                            <label for="pekerjaan" class="form-label">Pekerjaan <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="pekerjaan" id="pekerjaan"
+                                value="{{ $data->pekerjaan }}" placeholder="Masukkan Pekerjaan" required>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <div class="mb-3 mx-2 w-50">
                             <label for="nama_ayah" class="form-label">Nama Ayah</label>
                             <input type="text" class="form-control" name="nama_ayah" value="{{ $data->nama_ayah }}"
                                 id="nama_ayah" placeholder="Masukkan Nama Ayah">
@@ -83,7 +95,8 @@
                             </select>
                         </div>
                         <div class="mb-3 mx-2 w-50">
-                            <label for="surat_akte_lahir" class="form-label">Surat Akte Lahir <small>(.pdf)</small></label>
+                            <label for="surat_akte_lahir" class="form-label">Surat Akte Lahir
+                                <small>(.pdf)</small></label>
                             <input type="file" class="form-control" name="surat_akte_lahir" id="surat_akte_lahir"
                                 accept=".pdf">
                         </div>
@@ -147,30 +160,50 @@
                         <div class="d-flex justify-content-around">
                             <div class="mb-3 mx-2 w-50">
                                 <label for="nama_pasangan" class="form-label">Nama Lengkap Pasangan</label>
-                                <input type="text" class="form-control" name="nama_pasangan" value="{{ $data->menikah->nama_pasangan }}" id="nama_pasangan"
+                                <input type="text" class="form-control" name="nama_pasangan"
+                                    value="{{ $data->menikah->nama_pasangan }}" id="nama_pasangan"
                                     placeholder="Masukkan Nama Lengkap Pasangan">
                             </div>
                             <div class="mb-3 mx-2 w-50">
+                                <label for="jenis_kelamin_pasangan">Jenis Kelamin Pasangan</label>
+                                <select name="jenis_kelamin_pasangan" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled>Pilih Jenis Kelamin Pasangan</option>
+                                    <option value="Pria"
+                                        {{ $data->menikah->jenis_kelamin_pasangan === 'Pria' ? 'selected' : '' }}>Pria
+                                    </option>
+                                    <option value="Wanita"
+                                        {{ $data->menikah->jenis_kelamin_pasangan === 'Wanita' ? 'selected' : '' }}>Wanita
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <div class="mb-3 mx-2 w-50">
                                 <label for="tempat_lahir_pasangan" class="form-label">Tempat Lahir Pasangan</label>
-                                <input type="text" class="form-control" name="tempat_lahir_pasangan" value="{{ $data->menikah->tempat_lahir_pasangan }}"
-                                    id="tempat_lahir_pasangan" placeholder="Masukkan Tempat Lahir Pasangan">
+                                <input type="text" class="form-control" name="tempat_lahir_pasangan"
+                                    value="{{ $data->menikah->tempat_lahir_pasangan }}" id="tempat_lahir_pasangan"
+                                    placeholder="Masukkan Tempat Lahir Pasangan">
                             </div>
                             <div class="mb-3 mx-2 w-50">
                                 <label for="tanggal_lahir_pasangan" class="form-label">Tanggal Lahir Pasangan</label>
-                                <input type="date" class="form-control" name="tanggal_lahir_pasangan" value="{{ $data->menikah->tanggal_lahir_pasangan }}"
-                                    id="tanggal_lahir_pasangan" placeholder="Masukkan Tanggal Lahir Pasangan">
+                                <input type="date" class="form-control" name="tanggal_lahir_pasangan"
+                                    value="{{ $data->menikah->tanggal_lahir_pasangan }}" id="tanggal_lahir_pasangan"
+                                    placeholder="Masukkan Tanggal Lahir Pasangan">
                             </div>
                         </div>
                         <div class="d-flex justify-content-around">
                             <div class="mb-3 mx-2 w-50">
                                 <label for="nama_ayah_pasangan" class="form-label">Nama Ayah Pasangan</label>
-                                <input type="text" class="form-control" name="nama_ayah_pasangan" value="{{ $data->menikah->nama_ayah_pasangan }}"
-                                    id="nama_ayah_pasangan" placeholder="Masukkan Nama Ayah Pasangan">
+                                <input type="text" class="form-control" name="nama_ayah_pasangan"
+                                    value="{{ $data->menikah->nama_ayah_pasangan }}" id="nama_ayah_pasangan"
+                                    placeholder="Masukkan Nama Ayah Pasangan">
                             </div>
                             <div class="mb-3 mx-2 w-50">
                                 <label for="nama_ibu_pasangan" class="form-label">Nama Ibu Pasangan</label>
-                                <input type="text" class="form-control" name="nama_ibu_pasangan" value="{{ $data->menikah->nama_ibu_pasangan }}"
-                                    id="nama_ibu_pasangan" placeholder="Masukkan Nama Ibu Pasangan">
+                                <input type="text" class="form-control" name="nama_ibu_pasangan"
+                                    value="{{ $data->menikah->nama_ibu_pasangan }}" id="nama_ibu_pasangan"
+                                    placeholder="Masukkan Nama Ibu Pasangan">
                             </div>
                         </div>
                         <div class="d-flex justify-content-around">
@@ -190,8 +223,9 @@
                         <div class="d-flex justify-content-around">
                             <div class="mb-3 mx-2 w-100">
                                 <label for="tanggal_pernikahan" class="form-label">Tanggal Pernikahan</label>
-                                <input type="date" class="form-control" name="tanggal_pernikahan" value="{{ $data->menikah->tanggal_pernikahan }}"
-                                    id="tanggal_pernikahan" placeholder="Masukkan Tanggal Pernikahan">
+                                <input type="date" class="form-control" name="tanggal_pernikahan"
+                                    value="{{ $data->menikah->tanggal_pernikahan }}" id="tanggal_pernikahan"
+                                    placeholder="Masukkan Tanggal Pernikahan">
                             </div>
                         </div>
                     @else
@@ -201,6 +235,18 @@
                                 <input type="text" class="form-control" name="nama_pasangan" id="nama_pasangan"
                                     placeholder="Masukkan Nama Lengkap Pasangan">
                             </div>
+                            <div class="mb-3 mx-2 w-50">
+                                <label for="jenis_kelamin_pasangan">Jenis Kelamin Pasangan</label>
+                                <select name="jenis_kelamin_pasangan" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled>Pilih Jenis Kelamin Pasangan</option>
+                                    <option value="Pria">Pria</option>
+                                    <option value="Wanita">Wanita</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-around">
                             <div class="mb-3 mx-2 w-50">
                                 <label for="tempat_lahir_pasangan" class="form-label">Tempat Lahir Pasangan</label>
                                 <input type="text" class="form-control" name="tempat_lahir_pasangan"
@@ -254,8 +300,8 @@
 
                     <div class="mb-3 mx-2 w-100">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username" value="{{ $data->user->username }}" id="username"
-                            placeholder="Masukkan Username">
+                        <input type="text" class="form-control" name="username" value="{{ $data->user->username }}"
+                            id="username" placeholder="Masukkan Username">
                     </div>
                     <div class="mb-3 mx-2 w-100">
                         <label for="password" class="form-label">Password</label>

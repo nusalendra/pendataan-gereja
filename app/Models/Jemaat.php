@@ -10,7 +10,7 @@ class Jemaat extends Model
     use HasFactory;
     protected $table = 'jemaat';
     protected $primarykey = 'id';
-    protected $fillable = ['user_id', 'nama_lengkap', 'jenis_kelamin', 'alamat', 'tanggal_lahir', 'golongan_darah', 'surat_akte_lahir',' nama_ayah', 'nama_ibu', 'NIK', 'status_jemaat', 'status_vaksin'];
+    protected $fillable = ['user_id', 'nama_lengkap', 'jenis_kelamin', 'alamat', 'tanggal_lahir', 'golongan_darah', 'surat_akte_lahir', 'pekerjaan', 'pendidikan', 'nama_ayah', 'nama_ibu', 'NIK', 'status_jemaat', 'status_vaksin'];
 
     public function user() {
         return $this->belongsTo(User::class);

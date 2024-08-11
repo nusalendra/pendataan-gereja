@@ -78,6 +78,16 @@
                                         value="{{ $data->golongan_darah }}" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label class="form-label">Pendidikan</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $data->pendidikan }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Pekerjaan</label>
+                                    <input type="text" class="form-control border border-2 p-2"
+                                        value="{{ $data->pekerjaan }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Status Vaksin</label>
                                     <input type="text" class="form-control border border-2 p-2"
                                         value="{{ $data->status_vaksin }}" readonly>
@@ -172,6 +182,24 @@
                                         <input type="text" class="form-control border border-2 p-2"
                                             value="{{ $data->sidi->status_sidi }}" readonly>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Surat Baptis</label>
+                                        <form action="/data-jemaat/unduh-surat-baptis/{{ $data->id }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="btn btn-dark">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor"
+                                                    class="bi bi-download mb-1 me-1" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                                    <path
+                                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                                                </svg>
+                                                Unduh Surat Baptis
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         @else
@@ -197,6 +225,11 @@
                                             value="{{ $data->menikah->nama_pasangan }}" readonly>
                                     </div>
                                     <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nama Lengkap Pasangan</label>
+                                        <input type="text" class="form-control border border-2 p-2"
+                                            value="{{ $data->menikah->jenis_kelamin_pasangan }}" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Tempat, Tanggal Lahir Pasangan</label>
                                         <input type="text" class="form-control border border-2 p-2"
                                             value="{{ $data->menikah->tempat_lahir_pasangan }}, {{ \Carbon\Carbon::parse($data->menikah->tanggal_lahir_pasangan)->translatedFormat('d F Y') }}" readonly>
@@ -217,10 +250,46 @@
                                             value="{{ \Carbon\Carbon::parse($data->menikah->tanggal_pernikahan)->translatedFormat('d F Y') }}"
                                             readonly>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">Status Menikah</label>
                                         <input type="text" class="form-control border border-2 p-2"
                                             value="{{ $data->menikah->status_menikah }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Surat Baptis Pasangan</label>
+                                        <form action="/data-jemaat/unduh-surat-baptis-pasangan/{{ $data->id }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="btn btn-dark">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor"
+                                                    class="bi bi-download mb-1 me-1" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                                    <path
+                                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                                                </svg>
+                                                Unduh Surat Baptis Pasangan
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Surat Sidi Pasangan</label>
+                                        <form action="/data-jemaat/unduh-surat-sidi-pasangan/{{ $data->id }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="btn btn-dark">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor"
+                                                    class="bi bi-download mb-1 me-1" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                                    <path
+                                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                                                </svg>
+                                                Unduh Surat Sidi Pasangan
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
