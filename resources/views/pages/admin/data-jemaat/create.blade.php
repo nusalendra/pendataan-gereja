@@ -59,6 +59,19 @@
                     </div>
                     <div class="d-flex justify-content-around">
                         <div class="mb-3 mx-2 w-50">
+                            <label for="pendidikan" class="form-label">Pendidikan Terakhir <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="pendidikan" id="pendidikan"
+                                placeholder="Masukkan Pendidikan Terakhir" required>
+                        </div>
+                        <div class="mb-3 mx-2 w-50">
+                            <label for="pekerjaan" class="form-label">Pekerjaan <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="pekerjaan" id="pekerjaan"
+                                placeholder="Masukkan Pekerjaan" required>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <div class="mb-3 mx-2 w-50">
                             <label for="nama_ayah" class="form-label">Nama Ayah <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="nama_ayah" id="nama_ayah"
                                 placeholder="Masukkan Nama Ayah" required>
@@ -72,7 +85,8 @@
                     <div class="d-flex justify-content-around">
                         <div class="mb-3 mx-2 w-50">
                             <label for="status_vaksin">Status Vaksin <span class="text-danger">*</span></label>
-                            <select name="status_vaksin" class="form-select" aria-label="Default select example" required>
+                            <select name="status_vaksin" class="form-select" aria-label="Default select example"
+                                required>
                                 <option selected disabled>Pilih Status Vaksin</option>
                                 <option value="Sudah Vaksin">Sudah Vaksin</option>
                                 <option value="Belum Vaksin">Belum Vaksin</option>
@@ -123,9 +137,20 @@
                     <div class="d-flex justify-content-around">
                         <div class="mb-3 mx-2 w-50">
                             <label for="nama_pasangan" class="form-label">Nama Lengkap Pasangan</label>
-                            <input type="text" class="form-control" name="nama_pasangan"
-                                id="nama_pasangan" placeholder="Masukkan Nama Lengkap Pasangan">
+                            <input type="text" class="form-control" name="nama_pasangan" id="nama_pasangan"
+                                placeholder="Masukkan Nama Lengkap Pasangan">
                         </div>
+                        <div class="mb-3 mx-2 w-50">
+                            <label for="jenis_kelamin_pasangan">Jenis Kelamin Pasangan</label>
+                            <select name="jenis_kelamin_pasangan" class="form-select"
+                                aria-label="Default select example">
+                                <option selected disabled>Pilih Jenis Kelamin Pasangan</option>
+                                <option value="Pria">Pria</option>
+                                <option value="Wanita">Wanita</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around">
                         <div class="mb-3 mx-2 w-50">
                             <label for="tempat_lahir_pasangan" class="form-label">Tempat Lahir Pasangan</label>
                             <input type="text" class="form-control" name="tempat_lahir_pasangan"

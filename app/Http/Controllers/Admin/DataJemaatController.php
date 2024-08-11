@@ -51,6 +51,8 @@ class DataJemaatController extends Controller
         $jemaat->NIK = $request->NIK;
         $jemaat->alamat = $request->alamat;
         $jemaat->golongan_darah = $request->golongan_darah;
+        $jemaat->pendidikan = $request->pendidikan;
+        $jemaat->pekerjaan = $request->pekerjaan;
         $jemaat->nama_ayah = $request->nama_ayah;
         $jemaat->nama_ibu = $request->nama_ibu;
         $jemaat->status_vaksin = $request->status_vaksin;
@@ -67,21 +69,25 @@ class DataJemaatController extends Controller
             $menikah = new Menikah();
             $menikah->jemaat_id = $jemaat->id;
             $menikah->nama_pasangan = $request->nama_pasangan;
+            $menikah->jenis_kelamin_pasangan = $request->jenis_kelamin_pasangan;
             $menikah->tempat_lahir_pasangan = $request->tempat_lahir_pasangan;
             $menikah->tanggal_lahir_pasangan = $request->tanggal_lahir_pasangan;
             $menikah->nama_ayah_pasangan = $request->nama_ayah_pasangan;
             $menikah->nama_ibu_pasangan = $request->nama_ibu_pasangan;
             $menikah->tanggal_lahir_pasangan = $request->tanggal_lahir_pasangan;
+
+            $formatTanggalPernikahan = \Carbon\Carbon::parse($request->tanggal_pernikahan)->format('d F Y');
+
             if ($request->hasFile('surat_baptis_pasangan')) {
                 $file = $request->file('surat_baptis_pasangan');
-                $filename = 'Surat Baptis' . '_' . $menikah->nama_pasangan  . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('surat-baptis-pasangan-menikah'), $filename);
+                $filename = 'Surat Baptis' . '_' . $menikah->nama_pasangan  . '_' . $formatTanggalPernikahan . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('berkas-pendaftaran-menikah'), $filename);
                 $menikah->surat_baptis_pasangan = $filename;
             }
             if ($request->hasFile('surat_sidi_pasangan')) {
                 $file = $request->file('surat_sidi_pasangan');
-                $filename = 'Surat Sidi' . '_' . $menikah->nama_pasangan  . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('surat-sidi-pasangan-menikah'), $filename);
+                $filename = 'Surat Sidi' . '_' . $menikah->nama_pasangan  . '_' . $formatTanggalPernikahan . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('berkas-pendaftaran-menikah'), $filename);
                 $menikah->surat_sidi_pasangan = $filename;
             }
             $menikah->tanggal_pernikahan = $request->tanggal_pernikahan;
@@ -145,6 +151,8 @@ class DataJemaatController extends Controller
         $jemaat->NIK = $request->NIK;
         $jemaat->alamat = $request->alamat;
         $jemaat->golongan_darah = $request->golongan_darah;
+        $jemaat->pendidikan = $request->pendidikan;
+        $jemaat->pekerjaan = $request->pekerjaan;
         $jemaat->nama_ayah = $request->nama_ayah;
         $jemaat->nama_ibu = $request->nama_ibu;
         $jemaat->status_vaksin = $request->status_vaksin;
@@ -168,6 +176,7 @@ class DataJemaatController extends Controller
             $dataMenikah = [
                 'jemaat_id' => $jemaat->id,
                 'nama_pasangan' => $request->nama_pasangan,
+                'jenis_kelamin_pasangan' => $request->jenis_kelamin_pasangan,
                 'tempat_lahir_pasangan' => $request->tempat_lahir_pasangan,
                 'tanggal_lahir_pasangan' => $request->tanggal_lahir_pasangan,
                 'nama_ayah_pasangan' => $request->nama_ayah_pasangan,
@@ -177,27 +186,29 @@ class DataJemaatController extends Controller
 
             $menikah = Menikah::where('jemaat_id', $jemaat->id)->first();
 
+            $formatTanggalPernikahan = \Carbon\Carbon::parse($dataMenikah['tanggal_pernikahan'])->format('d F Y');
+
             if ($request->hasFile('surat_baptis_pasangan')) {
                 $file = $request->file('surat_baptis_pasangan');
-                $filename = 'Surat Baptis' . '_' . $request->nama_pasangan . '.' . $file->getClientOriginalExtension();
+                $filename = 'Surat Baptis' . '_' . $menikah->nama_pasangan  . '_' . $formatTanggalPernikahan . '.' . $file->getClientOriginalExtension();
 
                 if ($menikah && $menikah->surat_baptis_pasangan) {
-                    File::delete(public_path('surat-baptis-pasangan-menikah/' . $menikah->surat_baptis_pasangan));
+                    File::delete(public_path('berkas-pendaftaran-menikah/' . '_' . $menikah->surat_baptis_pasangan));
                 }
 
-                $file->move(public_path('surat-baptis-pasangan-menikah'), $filename);
+                $file->move(public_path('berkas-pendaftaran-menikah'), $filename);
                 $dataMenikah['surat_baptis_pasangan'] = $filename; // Update $dataMenikah array
             }
 
             if ($request->hasFile('surat_sidi_pasangan')) {
                 $file = $request->file('surat_sidi_pasangan');
-                $filename = 'Surat Sidi' . '_' . $request->nama_pasangan . '.' . $file->getClientOriginalExtension();
+                $filename = 'Surat Sidi' . '_' . $request->nama_pasangan . $formatTanggalPernikahan . '.' . $file->getClientOriginalExtension();
 
                 if ($menikah && $menikah->surat_sidi_pasangan) {
-                    File::delete(public_path('surat-sidi-pasangan-menikah/' . $menikah->surat_sidi_pasangan));
+                    File::delete(public_path('berkas-pendaftaran-menikah/' . $menikah->surat_sidi_pasangan));
                 }
 
-                $file->move(public_path('surat-sidi-pasangan-menikah'), $filename);
+                $file->move(public_path('berkas-pendaftaran-menikah'), $filename);
                 $dataMenikah['surat_sidi_pasangan'] = $filename;
             }
 
@@ -279,8 +290,8 @@ class DataJemaatController extends Controller
 
         $menikah = Menikah::where('jemaat_id', $data->id)->first();
         if ($menikah) {
-            File::delete(public_path('surat-baptis-pasangan-menikah/' . $menikah->surat_baptis_pasangan));
-            File::delete(public_path('surat-sidi-pasangan-menikah/' . $menikah->surat_sidi_pasangan));
+            File::delete(public_path('berkas-pendaftaran-menikah/' . $menikah->surat_baptis_pasangan));
+            File::delete(public_path('berkas-pendaftaran-menikah/' . $menikah->surat_sidi_pasangan));
         }
 
         $sidi = Sidi::where('jemaat_id', $data->id)->first();
@@ -299,6 +310,42 @@ class DataJemaatController extends Controller
 
         if ($jemaat->surat_akte_lahir) {
             $filePath = public_path('/surat-akte-lahir' . '/' . $jemaat->surat_akte_lahir);
+
+            if (File::exists($filePath)) {
+                return Response::download($filePath);
+            }
+        }
+    }
+
+    public function unduhSuratBaptis($id) {
+        $jemaat = Jemaat::find($id);
+        
+        if ($jemaat->sidi->surat_baptis) {
+            $filePath = public_path('/surat-baptis-pendaftaran-sidi' . '/' . $jemaat->sidi->surat_baptis);
+
+            if (File::exists($filePath)) {
+                return Response::download($filePath);
+            }
+        }
+    }
+
+    public function unduhSuratBaptisPasangan($id) {
+        $jemaat = Jemaat::find($id);
+        
+        if ($jemaat->menikah->surat_baptis_pasangan) {
+            $filePath = public_path('/berkas-pendaftaran-menikah' . '/' . $jemaat->menikah->surat_baptis_pasangan);
+
+            if (File::exists($filePath)) {
+                return Response::download($filePath);
+            }
+        }
+    }
+
+    public function unduhSuratSidiPasangan($id) {
+        $jemaat = Jemaat::find($id);
+        
+        if ($jemaat->menikah->surat_sidi_pasangan) {
+            $filePath = public_path('/berkas-pendaftaran-menikah' . '/' . $jemaat->menikah->surat_sidi_pasangan);
 
             if (File::exists($filePath)) {
                 return Response::download($filePath);

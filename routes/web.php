@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/data-jemaat/{id}', [DataJemaatController::class, 'update']);
         Route::delete('/data-jemaat/{id}', [DataJemaatController::class, 'destroy']);
         Route::post('/data-jemaat/unduh-surat-akte-lahir/{id}', [DataJemaatController::class, 'unduhSuratAkteLahir']);
+        Route::post('/data-jemaat/unduh-surat-baptis/{id}', [DataJemaatController::class, 'unduhSuratBaptis']);
+        Route::post('/data-jemaat/unduh-surat-baptis-pasangan/{id}', [DataJemaatController::class, 'unduhSuratBaptisPasangan']);
+        Route::post('/data-jemaat/unduh-surat-sidi-pasangan/{id}', [DataJemaatController::class, 'unduhSuratSidiPasangan']);
         
         Route::get('/pendataan-baptis', [PendataanBaptisController::class, 'index'])->name('pendataan-baptis');
         Route::put('/pendataan-baptis/{id}', [PendataanBaptisController::class, 'update'])->name('pendataan-baptis-update');
